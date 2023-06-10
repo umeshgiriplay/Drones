@@ -5,8 +5,8 @@ import lombok.Getter;
 import lombok.Setter;
 
 import java.time.LocalDateTime;
-import java.util.ArrayList;
-import java.util.List;
+import java.util.HashSet;
+import java.util.Set;
 
 @Entity
 @Table(name = "drone_deliveries")
@@ -18,8 +18,12 @@ public class DroneDelivery extends AbstractEntity {
     private Drone drone;
 
     @OneToMany(mappedBy = "delivery", cascade = CascadeType.ALL)
-    private List<Payload> payloads = new ArrayList<>();
+    private Set<Payload> payloads = new HashSet<>();
 
     @Column
     private LocalDateTime deliveryTime;
+
+    public Double getTotalPayloadWeight() {
+        return getPayloads().stream().mapToDouble(Payload::getWeight).sum();
+    }
 }
