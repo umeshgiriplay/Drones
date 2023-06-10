@@ -47,7 +47,7 @@ public class Drone extends AbstractEntity {
     @Enumerated(EnumType.STRING)
     @Column(nullable = false)
     @NotNull
-    private DroneState state;
+    private DroneState state = DroneState.IDLE;
 
     @OneToMany(mappedBy = "drone")
     @JsonIgnore

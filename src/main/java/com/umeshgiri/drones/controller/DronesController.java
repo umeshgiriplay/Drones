@@ -2,7 +2,6 @@ package com.umeshgiri.drones.controller;
 
 import com.umeshgiri.drones.entity.Drone;
 import com.umeshgiri.drones.entity.Payload;
-import com.umeshgiri.drones.enums.DroneState;
 import com.umeshgiri.drones.payload.CommonResponse;
 import com.umeshgiri.drones.payload.CommonResponseStatus;
 import com.umeshgiri.drones.service.DronesService;
@@ -20,7 +19,6 @@ public class DronesController {
 
     @PostMapping
     public CommonResponse save(@RequestBody @Valid Drone drone) {
-        drone.setState(DroneState.IDLE);
         return CommonResponse.success(dronesService.save(drone));
     }
 

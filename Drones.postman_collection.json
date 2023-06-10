@@ -1,0 +1,140 @@
+{
+	"info": {
+		"_postman_id": "b4f2db08-1b0f-40c1-86e6-b8a532742b64",
+		"name": "Drones",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Register Drone",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"serialNumber\": \"12345\",\r\n    \"model\": \"LIGHT_WEIGHT\",\r\n    \"weightLimit\": 40,\r\n    \"batteryCapacity\": 88\r\n}\r\n",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{serverport}}/drone",
+					"host": [
+						"{{serverport}}"
+					],
+					"path": [
+						"drone"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Load Drone",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "name",
+							"value": "spmparx",
+							"type": "text"
+						},
+						{
+							"key": "payloadType",
+							"value": "MEDICATION",
+							"type": "text"
+						},
+						{
+							"key": "weight",
+							"value": "40",
+							"type": "text"
+						},
+						{
+							"key": "code",
+							"value": "ABCD",
+							"type": "text"
+						},
+						{
+							"key": "uploadImage",
+							"type": "file",
+							"src": "/C:/Users/UmeshGiri/Documents/capthas/5expdq.png"
+						}
+					]
+				},
+				"url": {
+					"raw": "{{serverport}}/drone/load/1",
+					"host": [
+						"{{serverport}}"
+					],
+					"path": [
+						"drone",
+						"load",
+						"1"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Loaded Pending Delivery Payloads",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{serverport}}/drone/payloads/1",
+					"host": [
+						"{{serverport}}"
+					],
+					"path": [
+						"drone",
+						"payloads",
+						"1"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Available Drones For Loading",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{serverport}}/drone/available",
+					"host": [
+						"{{serverport}}"
+					],
+					"path": [
+						"drone",
+						"available"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Battery",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{serverport}}/drone/battery/1",
+					"host": [
+						"{{serverport}}"
+					],
+					"path": [
+						"drone",
+						"battery",
+						"1"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
