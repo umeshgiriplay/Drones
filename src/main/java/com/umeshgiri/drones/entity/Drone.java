@@ -1,13 +1,13 @@
 package com.umeshgiri.drones.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.umeshgiri.drones.enums.DroneModel;
 import com.umeshgiri.drones.enums.DroneState;
 import jakarta.persistence.*;
+import jakarta.validation.constraints.*;
 import lombok.Getter;
 import lombok.Setter;
 
-import javax.validation.constraints.DecimalMax;
-import javax.validation.constraints.Size;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -15,31 +15,40 @@ import java.util.List;
 @Table(name = "drones")
 @Getter
 @Setter
-public class Drone extends AbstractEntity{
+public class Drone extends AbstractEntity {
 
     @Size(max = 100)
-    @Column(nullable = false, length = 100)
+    @Column(nullable = false, length = 100, unique = true)
+    @NotNull
+    @NotEmpty
     private String serialNumber;
 
     @Enumerated(EnumType.STRING)
     @Column(nullable = false)
+    @NotNull
     private DroneModel model;
 
     /**
      * The weight limit of the drone in grams.
      */
     @DecimalMax(value = "500")
-    @Column(nullable = false, length = 3)
-    private double weightLimit;
+    @DecimalMin(value = "0")
+    @Column(nullable = false)
+    @NotNull
+    private Double weightLimit;
 
     @DecimalMax(value = "100")
-    @Column(nullable = false, length = 3)
-    private double batteryCapacity;
+    @DecimalMin(value = "0")
+    @Column(nullable = false)
+    @NotNull
+    private Double batteryCapacity;
 
     @Enumerated(EnumType.STRING)
     @Column(nullable = false)
+    @NotNull
     private DroneState state;
 
     @OneToMany(mappedBy = "drone")
+    @JsonIgnore
     private List<DroneDelivery> deliveries = new ArrayList<>();
 }
