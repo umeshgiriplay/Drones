@@ -1,7 +1,7 @@
 package com.umeshgiri.drones.service;
 
 import com.umeshgiri.drones.entity.Document;
-import com.umeshgiri.drones.entity.DocumentType;
+import com.umeshgiri.drones.enums.DocumentType;
 import com.umeshgiri.drones.repository.DocumentRepository;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
@@ -31,20 +31,24 @@ public class DocumentService {
         return "/image/" + document.getType().name().toLowerCase() + "/" + document.getName() + "." + document.getExtension();
     }
 
-    public Document save(MultipartFile multipartFile, DocumentType documentType) throws IOException {
-        String contentType = multipartFile.getContentType();
+    public Document save(MultipartFile multipartFile, DocumentType documentType) {
+        try {
+            String contentType = multipartFile.getContentType();
 
-        if (!ALLOWED_MIME_TYPES.contains(contentType)) {
-            throw new IllegalArgumentException("Invalid file type. Only PNG, JPEG, and GIF images are allowed");
+            if (!ALLOWED_MIME_TYPES.contains(contentType)) {
+                throw new IllegalArgumentException("Invalid file type. Only PNG, JPEG, and GIF images are allowed");
+            }
+
+            String originalFilename = multipartFile.getOriginalFilename();
+
+            if (originalFilename == null || originalFilename.isEmpty()) {
+                throw new IllegalArgumentException("Uploaded file must have a name.");
+            }
+
+            return save(multipartFile.getBytes(), getExtension(originalFilename), documentType);
+        } catch (IOException e) {
+            throw new RuntimeException(e);
         }
-
-        String originalFilename = multipartFile.getOriginalFilename();
-
-        if (originalFilename == null || originalFilename.isEmpty()) {
-            throw new IllegalArgumentException("Uploaded file must have a name.");
-        }
-
-        return save(multipartFile.getBytes(), getExtension(originalFilename), documentType);
     }
 
     private String getExtension(String filename) {

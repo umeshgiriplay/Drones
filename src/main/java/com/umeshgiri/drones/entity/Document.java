@@ -1,6 +1,7 @@
 package com.umeshgiri.drones.entity;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.umeshgiri.drones.enums.DocumentType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.EnumType;

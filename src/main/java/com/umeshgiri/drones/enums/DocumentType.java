@@ -1,4 +1,4 @@
-package com.umeshgiri.drones.entity;
+package com.umeshgiri.drones.enums;
 
 public enum DocumentType {
     MEDICATION
