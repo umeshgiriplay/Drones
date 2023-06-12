@@ -41,7 +41,7 @@ This project is a RESTful API for managing drones and their payload in a deliver
         "payloadType": <payload_type>,
         "weight": <medication_weight>,
         "code": "<medication_code>",
-        "payloadType": <image>
+        "uploadImage": <image>
     ```
 
 - `GET /drone/payloads/{id}`: Check loaded medication items for a given drone.
